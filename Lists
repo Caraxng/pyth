@@ -1,1 +1,128 @@
+#there are two techniques to acomplish same thing with list
 
+method one normal loop method..indefinite loop
+
+total = 0
+count = 0
+
+while True:
+    inp = input('Enter a Number:')
+    if inp == 'Done' :break
+    value = float(inp)
+    total = total + value
+    count = count + 1
+Average + total/count
+print('Average:',Average)
+Print('Well Done')
+exit()
+
+list method
+
+numlist = list()      # list reserved assigned to the variable numlist. While numlist is empty list
+
+while True :
+    inp = input('Enter a Number:') 
+    if inp == 'Done' : break
+    value = float(inp)
+    numlist.append(value)
+Average = sum(numlist) / len(numlist)
+print('Average: ',Average)
+print('All Good')
+    
+    
+    
+    # List Part  3
+    How strings and list re related............ we use square bracked operator to do lots of things.
+    
+    Best Friends Lists and String: 
+    
+    split breaks strings apart and produce list of strings. We can access a particu word or loop thru all.
+    
+    abc = ('with three words')                      # split looks for blanks and break it into pieces and return the elements
+    stuff = abc.split()
+    ['with','three','words']
+    
+    print(len(stuff))
+    3
+    print(stuff[0])
+    with
+    
+    for w in stuff print('w')  
+    with
+    three 
+    words
+    
+    
+    # split rule...
+    when you don't specify a delimiter multiple spaces are treated like one delimiter.... treated as one space
+    you can specify delimiter character to use in the spacing
+    
+    
+    line = ' a lot       of spacing'
+    etc = line.split()
+    print('etc')
+    ['a ', 'lot', 'of', 'spacing']
+    
+    line = 'first;second;third'   # you don't have to split based on spaces only
+    thing = line.split()
+    print(thing)
+    [first;second;third]   ...returns list with no space. It's a line. Split job is to use space to split based on spaces
+    print(len(thing))
+    1
+    
+    thing = line.split(;)   #you can tell split what character you want to base the split on instead of the default space. Based on semicolon
+    print(thing)
+    
+    ['first', 'second', 'third']
+    
+  print(len(thing))
+  3
+  
+  
+  #Still on email data parsing 
+  
+  from stephen.marquard@uct.ac.za sat Jan 5 09:14:16 2008
+
+  
+  fhand = open('mbox.txt')
+  for line in fhand:
+      line = line.rstrip()
+      if not line startwith('from') : continue
+      words = line.split()
+print(words)
+
+['from ', 'stephen.marquard@uct.ac.za', 'sat', 'Jan', '5', '09:14:16', '2008']
+ 
+print(words[2])
+sat
+
+
+# The Double split patteren:
+
+sometimes we split a line one way,and then grab one of the pieces of the line and split that piece again
+
+words = line.split()
+email = words[1]
+print(email)
+
+stephen.marquard@uct.ac.za 
+
+pieces = email.split('@')
+['stephen.marquard', 'uct.ac.za')
+
+host = piece([1])
+print(host)
+or 
+
+print(pieces[1])
+
+
+from stephen.marquard@uct.ac.za sat Jan 5 09:14:16 2008
+
+
+cleaner than using find()
+
+topics covered   cocept of a collection,list and definite loops,indexing and lookup,list mutability,functions:len min max,sum, slicing list. List methods:append,remove
+sorting lists, sorting list, splitting strings into list of words,using split to parse strings.
+
+  
