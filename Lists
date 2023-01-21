@@ -125,4 +125,68 @@ cleaner than using find()
 topics covered   cocept of a collection,list and definite loops,indexing and lookup,list mutability,functions:len min max,sum, slicing list. List methods:append,remove
 sorting lists, sorting list, splitting strings into list of words,using split to parse strings.
 
+Assignment :
+
+1
+
+
+8.4 Open the file romeo.txt and read it line by line. For each line, 
+split the line into a list of words using the split() method. 
+The program should build a list of words. For each word on each line 
+check to see if the word is already in the list and if not append 
+it to the list. When the program completes, sort and print the resulting 
+words in python sort() order as shown in the desired output.
+You can download the sample data at http://www.py4e.com/code3/romeo.txt
+
+
+
+fname = input("Enter file name: ")
+fh = open(fname)
+lst = list()
+for line in fh:
+    line.rstrip()
+    word = line.split()
+    for x in word:
+        if x not in lst :
+            lst.append(x)
+    else:
+        pass
+#lstst = lst.sort()   
+#print(lst.sort())
+lst.sort()
+print(lst)
+    
+    
+#print(line.rstrip())
+
+
+or
+
+
+
+
+2 .
+
+
+8.5 Open the file mbox-short.txt and read it line by line. When you find a line that starts with 'From ' like the following line:
+From stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008
+You will parse the From line using split() and print out the second word in the line (i.e. the entire address of the person who sent the message). Then print out a count at the end.
+Hint: make sure not to include the lines that start with 'From:'. Also look at the last line of the sample output to see how to print the count.
+
+You can download the sample data at http://www.py4e.com/code3/mbox-short.txt
+
+
+
+inp = input('Enter File Name:')
+fopen = open(inp)
+count = 0
+for line in fopen:
+    line.rstrip()
+    if not line.startswith('From'):
+        continue 
+    word = line.split()
+    print(word[1])
+    count = count + 1 
+    
+print('There were',count,'lines in the file with From as the first word')    
   
