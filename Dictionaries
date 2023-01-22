@@ -129,4 +129,75 @@ print(ddd)
  MOST COMMON NAME:
  most common application of dictionary.....counting
  
+ Making histograms....counting the frequency of things
  
+ counting how often we see something :
+ 
+ humans use eyes to check and weigh the frequency of things. 
+ 
+ if you have a million things would be better to write python program using dictionaries
+ 
+ ddd = dict()
+ ddd = ['csev'] = 1
+ ddd = ['cwen'] = 1
+ print(ddd)
+ {'csev':1,'cwen':1}
+ 
+ ddd['cwen'] = ddd['cwen'] + 1
+ print(ddd)
+ {'csev':1,'cwen':2}
+ 
+ Dict Tracebacks ....
+ 
+ It's an error to call or ref a key which is not in the dictionary
+ 
+ we canuse the in operator to see if a key is in the dict.
+ 
+ ccc = dict()
+ print(cc['csev'])
+ traceback
+ 
+ csev in cc
+ false
+ 
+ WHEN WE SEE A NEW NAME :
+ 
+ When we encounter a new name,we need to add a new entry in the dictionary and if this is the second or later time 
+ we are seeing the name,we simply add one to the count in the dict.
+ 
+counts = dict()   # create and empty dict
+names = ['csev', 'cwen', 'csev', 'zqian', 'cwen'] #list of keys to go to the dict
+for name in names:              # loop through the names...name(could be anything x, tee ) will assume each key name or name in names and iterate
+    if name not in counts:    # if name not in dictionary
+        counts[name] = 1  # add the name to it as one ,first occurence # This line is adding a new thing
+    else:                         # if not
+        counts[name] = counts[name] + 1       #if not ,if d key is already in the dict then add plus to it's number of occurence # addin somti to exisiting thing
+print(counts) 
+{'csev':2, 'cwen':2, 'zqian':1}
+
+#if the name we are looking at,lets say csev is not in the dictionary already,then set it to be 1. And that becomes the value for that name
+
+THE GET METHOD FOR DICT:
+
+The pattern of checking to see if a key is in the dictionary or not and assuming a default value if the key is not
+there is so common that there is a method called get() that does this for us.
+
+if name in counts:
+    x = counts[name]          # Do one thing if it's in there,retrieve the current thing
+else:
+    x = o             # otherwise pick a default value in this case 0
+x = counts.get[name, 0] #if you say counts,counts is a dictionary .get a method. You give it a key and a default value.If the key is will get the value if not 
+print(x)
+{'csev':2, 'zqian':1, 'cwen':2}     #Default Value if key does not exist and no traceback
+
+the four lines of code became/collapses this one line : x = counts.get[name, 0] because x is going to be whatever is there if it exist or it's going to be 0 then add
+1 to it and it's to be one
+
+
+counts = dict()
+names = ['csev', 'cwen', 'csev', 'zqian', 'cwen'] #list of keys to go to the dict
+for name in names:
+    counts[name] = counts.get(name, o) + 1
+print(counts) 
+{'csev':2, 'cwen':2, 'zqian':1}    
+   
