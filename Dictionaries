@@ -1,1 +1,132 @@
+Chapter 9
+Python Dictionaries
 
+are what most programmers love the most about python....
+
+what's collection...
+* nice because we can put more than one value in it and carry them around in one convenient package
+* we have a bunch of values in one single variable
+* we do this by having more than one place ' in ' the variable
+* we have more ways of finding the different places in a variable
+
+WHAT IS NOT A COLLECTION
+
+Most of our variables have one value in them,when we put new values in the variable,the old value is overwritten.
+x = 2
+x = 4
+print(x)
+4
+
+A STORY OF TWO COLLECTIONS:
+
+List:  A linea collection of values that stay in order
+Dictionary : A bag of values each with it's own label
+
+Dict are python most powerful data collection...
+allows us to do fast database-like operations in python
+have different names in different languages...
+
+associative arrays /perl & php
+properties or map or hashmap --java
+proprty bag-- c#/.net
+
+are like list but they have keys,label,tag
+
+associate between key in a value while list is position in a value
+list is less powerful and flexible than dict ...most modern prog lang have this notion of associative arrays
+they are key value pairs....dict
+
+Collections are about putting more than one thing in...difference is in ways of indexing them
+
+
+list index their entries based on position in the list
+dict like bags no order
+so we index things in bag with look up tag/key
+
+purse = dict()  # lets make a dctionary just like an empty list
+purse = ['money'] = 12  # i want to store 12 and i want to label it money. # item + quantity
+purse = ['candy'] = 3
+purse = ['tissue'] = 75
+
+print(purse)
+{'money':12, 'candy':3,'tissue':75}
+
+print(purse[candy])   #we can ask with an index operator what's in purse for the key candy
+3
+
+purse[candy] = purse[candy] + 2  # we can update or modify things  here add 2 to it
+print(purse)
+{'money':12,'tissue':75,'candy':5}
+
+
+COMPARING LIST AND DICT
+they both can have new items added
+
+lst = list()            ddd = dict()
+lst.append(21)          ddd['age'] = 21
+lst.append(183)         ddd['course'] = 183
+print(lst)              print(ddd)
+[21, 83]                {'age':21,'course':183}
+positional. in list      mapping
+indexing is positioning
+used posi to change
+21 to 23
+
+lst[0] = 23             ddd['age'] = 23   #while dict is the key used key to change 21 to 23
+print(lst)              print(ddd)
+[23,83]                 {'age':23,'course':183}
+
+different is the index mechanism. How we store things and how we look things up
+
+
+AGAIN
+
+Pretty much doing same thing execpt indexing mechanism
+
+                                        LIST
+
+
+lst = list()                  key       Value
+lst.append(21)                 0          21             lst
+lst.append(183)                1          183
+print(lst)
+[21, 183] 
+lst[0] = 23
+print(lst)
+[23,83]
+
+                                           Dictionary
+
+
+ddd = dict()
+ddd['age'] = 21                        Key                 Value 
+ddd['course'] = 182
+print(ddd)                             ['age']             21
+{'age':21,'course':182}                ['course']          182                                ddd
+
+ddd['age'] = 23
+print(ddd)
+ {'age':23,'course':183}
+ 
+ 
+ dictionary key is a string...can use other things. But string is simpler...
+ 
+ 
+ 
+ DICTIONARY LITERALS/CONSTANTS
+ 
+ Dict leterals use curly braces and have a list of key:value pairs
+ You can make an empty dict using empty curly braces
+ 
+ jjj= {'chuck':1, 'fred':42,'jan':100}  # dict literals use the exact same syntax to printout. start and end with curly brace{}
+ print(jjj)                             # and have series of key(chuck),colon(:),and value (1) in line with associative array..associating 1(value) with key chuck
+ {'jan':100, 'chuck':1,'fred':42}
+ 
+ 000 = {} # make an empty dict/ short cut to do this purse = dict() / purse = {}
+ print(000)
+ {}
+ 
+ MOST COMMON NAME:
+ most common application of dictionary.....counting
+ 
+ 
