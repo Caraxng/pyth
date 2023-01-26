@@ -181,7 +181,7 @@ THE GET METHOD FOR DICT:
 
 The pattern of checking to see if a key is in the dictionary or not and assuming a default value if the key is not
 there is so common that there is a method called get() that does this for us.
-
+names = ['csev', 'cwen', 'csev', 'zqian', 'cwen']
 if name in counts:
     x = counts[name]          # Do one thing if it's in there,retrieve the current thing
 else:
@@ -201,3 +201,103 @@ for name in names:
 print(counts) 
 {'csev':2, 'cwen':2, 'zqian':1}    
    
+COUNTING WORDS IN TEXT :
+
+
+Counting Pattern.
+
+The general to count words in a line of text is to split the line into two words,then loop through the words and use a 
+dictionary to track the count of each word independently.
+
+counts = dict()
+print('Enter a line of text:')
+line = input('')
+
+words = line.split()
+print('Words':,words)
+print('counting ......')
+for word in words:
+    counts[words] = counts.get(word,0) + 1
+print('Counts', counts)
+
+DEFINITE LOOPS & DICTIONARIES
+
+Even though dictionaries are not stored in order,we can write a for loop that goes through all the entries in the dictionary.
+Actually it goes through all the keys in the dictionary and looks up the value.
+
+counts = {'chuck':1 , 'fred':42 , 'Jan':100}
+for key in counts:
+    print(key,counts[key]) # first get the keys.... then the counts'value' for each key
+    
+Jan 100
+Chuck 1
+Fred 42
+
+Retrievig List of Keys and Values :
+
+You can get a list of keys(tags,label),values(number),or items(both,key & value) from a dictionary.
+
+jj = {'chuck':1 , 'fred':42 , 'Jan':100}
+
+print(list (jj))
+['jan', 'chuck', 'fred']
+
+print(jj.keys())
+['jan', 'chuck', 'fred']
+
+print(jj.values())
+[100 , 1 , 42]
+
+print(jj.items())
+[('jan',100), ('chuck',1), ('fred',42)]   # first combined composite data structure where it's a list,three item list.
+     0             1 ^          2
+                     |
+what is a tuple ? coming soon
+
+BONUS TWO ITERATION VARIABLES 
+
+* We loop through the key-value pairs in a dictionary using 'two' iteration variables.
+* Each iteration,the first variable is the key and the second variable is the corresponding value 
+for the key
+jj = dict() # my idea. Not added in the example
+jj = {'chuck':1 , 'fred':42 , 'Jan':100}
+for aa,bb in jj.items() :
+print(aa,bb)
+ 
+                  key       value
+                  aa        bb
+
+jan 100          [jan]      100
+chuck 1          [chuck]     1
+fred 42          [fred]     42
+
+
+
+
+name = input('Enter File Name:')    # word.txt
+handle = open(name)
+
+counts = dict()
+for line in handle :
+    word = line.split()
+    for word in words:
+        counts[word] = counts.get(word,0) +  1
+    
+print ('Counts', counts)
+
+
+Name = input('Enter File Name:')   clown.txt
+handle = open(Name)
+
+counts = dict()
+bigcount = None
+bigword = None 
+for word,count in counts.items()
+    if bigcount is None or count > bigcount :
+        bigword = word
+        bigcount = count
+print(bigword,bigcount)
+
+
+
+
