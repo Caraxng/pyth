@@ -277,27 +277,34 @@ fred 42          [fred]     42
 name = input('Enter File Name:')    # word.txt
 handle = open(name)
 
-counts = dict()
+counts = dict()  # empty dict
 for line in handle :
     word = line.split()
     for word in words:
         counts[word] = counts.get(word,0) +  1
     
 print ('Counts', counts)
+to 16
+
+to = the most common word
+16 = number of occurence
 
 
 Name = input('Enter File Name:')   clown.txt
 handle = open(Name)
 
 counts = dict()
-bigcount = None
-bigword = None 
+bigcount = None # number of instance of most common word
+bigword = None  # most common word
 for word,count in counts.items()
     if bigcount is None or count > bigcount :
-        bigword = word
+        bigword = word   #max  loop
         bigcount = count
 print(bigword,bigcount)
+the 7
 
-
-
+bigword = the = most common word
+bigcount = 7 = number of occurence
+highest word =big word = word that is the most common
+Bigcount is the word the most number of times
 
