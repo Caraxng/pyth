@@ -308,3 +308,56 @@ bigcount = 7 = number of occurence
 highest word =big word = word that is the most common
 Bigcount is the word the most number of times
 
+
+Assignment :
+
+name = input("Enter file Name:")  # mbox-short.txt
+handle = open(name)
+counts = dict()
+
+for line in handle :
+    line = line.rstrip()
+    if line.startswith('From ') :
+        word = line.split()
+#        print(word)
+        
+        words = (word[1])
+
+        counts[words] = counts.get(words,0) + 1
+#print(count)
+
+wordmstcount = None
+wordmstcom =  None
+
+for key,value in counts.items() :
+    if wordmstcount is None or value > wordmstcount :
+       wordmstcom = key
+       wordmstcount = value
+print(wordmstcom,wordmstcount)        
+
+
+
+
+name = input("Enter file Name:")
+handle = open(name)
+count = dict()
+
+for line in handle :
+    line = line.rstrip()
+    if line.startswith('From ') :
+        word = line.split()
+#        print(word)
+        
+        words = (word[1])
+#        print(words) 
+#        for word in words:
+        count[words] = count.get(words,0) + 1
+#print(count)           
+
+wordmstcount = None
+wordmstcom = None
+for key,value in count.items() :
+    if wordmstcount is None or value > wordmstcount :
+        wordmstcount = value
+        wordmstcom = key
+print(wordmstcom,wordmstcount)        
