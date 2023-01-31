@@ -224,6 +224,8 @@ for value,key in lst[:10] :
 
 EVEN SHORTER VERSION :
 
+classic data structure..
+
 c = {'a': 10, 'b':1, 'c':22}
 print(sorted( [ (v, k) for k,v in c.items() ] ) )    #this is a list of 2 tuples v & k for 
 
@@ -236,5 +238,14 @@ sort takes as input a list
 
 *list comprehension creates a dynamic list. In this case we make list of reversed tuples and then sort.
 
+you want to master this ways that focuses on the data you want to see rather than the steps you want to take
 
+topics covered....
+tupl syntax
+immutability
+comparability
+sorting
+tuples in assignment statement
+sorting dictionaries by either key or value
 
+three foundational data structures/collections in pything list,dict,and tuples
