@@ -1,1 +1,240 @@
 
+TUPLES 
+
+kins reductionist version of list....
+
+Third kind of collection Tuples. Are a lot like lists.
+Another kind of sequence that functions much like a list- have elements indexed starting at zero 0
+
+similar to list but tuple uses round braces....parenthesis
+
+x = ('glenn', 'sally', 'joseph')
+print(x[2])
+joseph
+
+y = (1, 9, 2)
+print(y)
+(1,,9,2)
+
+print(max(y))
+9
+
+for iter in y :
+    print(inter)
+    
+1
+9
+2
+
+BUT TUPLS ARE IMMUTABLE :
+
+Unlike a list, once you create a tuple,you cannot alter it's content just like a string. 
+List
+x = [9, 8, 7]
+x[2] = 6
+print(x)
+[9, 8, 6]
+
+
+string
+
+x = 'ABC
+x[2] = D
+print(x)
+
+Traceback str object does not support item assignment ... traceback... string is not mutable
+
+tuples
+
+x = (5, 4, 3)
+x[2] = 0
+
+print(x)
+Traceback ... tuple object does not support item assignment. traceback tuple is not mutable
+
+item assignment = x[2]  x sub 2
+* It's like object is an element...like the contents of a list like 5,4,3 bove or a list variable like x above
+The reason tuples are not modifiable is for efficiency.
+
+THINGS NOT TO DO WITH TUPLES:
+
+x = (3, 2, 1)
+x.sort()
+traceback ... 
+Attribue error ,tuple object has no attribue sort
+x.append(5)
+traceback
+Attribue error ,tuple object has no attribue append
+x.reverse()
+Attribue error ,tuple object has no attribue reverse
+
+Tuples -:
+*Take up less storage
+*Qicker to access
+*More efficient than list
+*designed internally in a way we don't understand
+
+If all you want to do is store a list,look at it and throw it away you probably should use a tuple 
+instead.
+
+They are very similar but for nonmutability of tuples.
+Anything that ypu can do in a list that modifies the list is not allowed for tuple
+
+A TALE OF TWO SEQUENCES :
+list methods....
+
+l = list()
+dir (l)
+['append', 'count', 'extend', 'index', 'insert', 'pop', 'remove', reverse', 'sort']
+
+
+Tuple methods
+
+t = tuple()
+dir (t)
+
+['count', 'index']
+
+tuples are simply limited list
+
+MORE EFFICIENT:
+
+*Since python does not have to build tuple structures to be modifiable,they are simpler and more efficient in terms of memory use  and performance than list.
+*So in our program,when we are making 'temporary variables',we prefer tuples over lists.
+
+TUPLES AND ASSIGNMENT
+
+We can also put a tuple on the left-hand side of an assignment statement
+We can even omit the parenthesis
+
+(a , y) = (4, 'fred')
+print(y)
+fred
+
+(a , b) = (99 , 98)
+print(a)
+99
+
+TUPLES AND DICTIONARIES
+
+The item() method in dictionary returns a list of (key,value) tuples
+
+d = dict()
+d['csev'] = 2
+d['cwen'] = 4
+
+for (k,v) in d.items() :  # always use k,v for key value iterations...for sanity
+    print(k,v)
+
+csev 2
+cwen 4
+
+tups = d.items() # get list of the above tuples
+print(tups)   
+
+dict_items( [('csev',2), ('cwen',4)] ) # Within each thing you get you have two tuple in terms of positional...csev,2 is 0 & 1
+
+TUPLES ARE COMPARABLE
+
+Comparison operator workds with tuples and other sequences. If the first item is equal,python goes on the next element. And so on. Unti it finds element that differ.
+
+(0, 1, 2) < (5, 1, 2)    # compares only the first elements in the left to that in right.... 0 & 5 don't compare 2nd and 3rd element/number
+True
+
+(0, 1, 2000000) < (0, 3, 4) # the answer is zero,it can't answer the question so it goes to the second element.  1 & 3 which is true. Stops once it gets true
+True
+
+('Jones', 'sally') < ('Jones',  'Sam') # same with strings. Jones and Jones are same answer is zero and can't answer. Compares alphabets of sally and sam. 
+                                         3rd l in sally is <  Last m in sam. So sally is less than Sam 
+
+True
+
+('Jones', 'Sally') > ('Adams', 'Sam') # j in Jones is greate than A in Adams True
+True
+
+
+SORTING LIST OF TUPLES
+
+*We can take advantange of ability to sort a list of tuples to get a sorted version of dictionary
+*First we sort the dictionary by the key using the items() method and sorted() function.
+
+produce list of tuples and sort. We can get the list fro aa dict and 
+convert dict to list sort the lst
+
+d = {'a': 10, 'b':1, 'c':22} # map a to 10,b to 1 etc
+d.items()
+dict_items([('a', 10), ('c', 22), ('b', 1)]) # What do we get here,mapping is exact but order does not matter. Dict
+
+sorted(d.items())
+[('a', 10), ('b', 1), ('c', 22)] # sorted in ascending order based on key without looking at the value
+
+
+Using sorted()
+
+We can do this more directly using the built-in function sorted that takes a sequence as a parameter and returns a sorted sequence.
+d = {'a': 10, 'b':1, 'c':22}
+t = sorted(d.items())
+t
+[('a', 10), ('b', 1), ('c', 22)]
+for k,v in sorted(d.items()) :
+    print(k,v)
+a 10
+b 1
+c 22
+
+SORT BY VALUES INSTEAD OF KEY:
+* If we could construct a list of tuples of the form (value,key) we could sort by value
+* We do this with a for loop that creates a list of tuples.
+
+c = {'a': 10, 'b':1, 'c':22}  # dictionary
+tmp = list()  # empty list
+for k,v in c.items() :              # for dict key value in c that is .items
+    tmp.append( (v,k) ) # we make/ append to d list tuple why the vk has ()
+    
+print(tmp)    
+[ (10, 'a'), (c, '22'), (1, 'b') ]  # tupl list
+
+tmp = sorted(tmp, reverse=True)   # now sort. But by values since they are now the first thing vk and from the highest to the lowest(reverse)
+print(tmp)
+
+[ 22, 'c'), (10, 'a'), (1, 'b') ]
+
+
+THE TOP 10 MOST COMMON WORD
+
+
+fhand = open('romeo.txt')
+counts =  dict()
+for line in fhand :
+    words = line.split()
+    for word in words :
+        counts[word] =   counts.get(word,0) + 1 # count[word] counting the number of time each word occurs = # this line an idiom for making a histogram
+                                          # histogram... get and count each word and number of occurences and store in the dictionary. For each word,default number of
+                                                # occurence is zero = word,0 ....then + 1 for every occurence,1 occur +1 another,+1 = 2, another + 1 = 3 etc for
+                                                # that particular word until you check all the word in word. Then you have a dictionary with key and value
+
+lst = list()
+for key,value in counts.items() :
+    newtup = (value,key)
+    lst.append(newtup)  # list of tuples in vk(value key) order
+lst = sorted(lst, reverse = True)
+for value,key in lst[:10] :
+    print(key value)
+
+
+EVEN SHORTER VERSION :
+
+c = {'a': 10, 'b':1, 'c':22}
+print(sorted( [ (v, k) for k,v in c.items() ] ) )    #this is a list of 2 tuples v & k for 
+
+[ (1 'b'), (10 'a'), (22 'c')]
+
+
+simply : print sorted (in ascending order),v k (value & key), for k,v in c.items
+
+sort takes as input a list
+
+*list comprehension creates a dynamic list. In this case we make list of reversed tuples and then sort.
+
+
+
