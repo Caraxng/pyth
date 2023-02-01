@@ -219,7 +219,7 @@ for key,value in counts.items() :
     lst.append(newtup)  # list of tuples in vk(value key) order
 lst = sorted(lst, reverse = True)
 for value,key in lst[:10] :
-    print(key value)
+    print(key, value)
 
 
 EVEN SHORTER VERSION :
@@ -249,3 +249,44 @@ tuples in assignment statement
 sorting dictionaries by either key or value
 
 three foundational data structures/collections in pything list,dict,and tuples
+
+Assignment 
+
+10.2
+
+
+10.2 Write a program to read through the mbox-short.txt and figure out the distribution by hour of the day for each of the messages. 
+You can pull the hour out from the 'From ' line by finding the time and then splitting the string a second time using a colon.
+From stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008
+Once you have accumulated the counts for each hour, print out the counts, sorted by hour as shown below.
+
+
+
+
+
+name = input("Enter file:")
+if len(name) < 1:
+    name = "mbox-short.txt"
+handle = open(name)
+counts = dict()
+
+for line in handle :
+    line = line.rstrip()
+    if line.startswith('From ') :
+        hour = line.split()
+        acthr = (hour[5])
+        sephr = acthr.split(':')
+        thehour = (sephr[0])
+        counts[thehour] = counts.get(thehour,0) + 1
+#        print(counts)
+lst = list()
+for key,value in counts.items() :
+    newtup = (key,value)
+    lst.append(newtup)
+lst = sorted(lst)
+for key,value in lst[:12] :
+    print(key,value)
+
+
+
+
