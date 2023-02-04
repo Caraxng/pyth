@@ -1,1 +1,131 @@
+In computing,regular expression also referred to as regex or regexp provides a concise and flexible means for matching strings of text such as particular
+characters,words,or patterns,of characters. A regular expression is written in a formal language that can be interpreted by a regular expression processor.
 
+The idea of a regex is that you come up with a lang. ,a character based program language where you can do smart searching basically
+
+Really smart/clever wildcard expressions for matching and parsing strings
+
+really smart find or search  
+Very structured way to go about searching for information
+
+Understanding Regular Expressions
+ * Very powerful and quite cryptic
+ * Fun once you understand them
+ * Regex are language unto themselves
+ * A language of ' marker characters'- programming with characters.
+ * It's kind of an old school language- compact
+
+
+Python Regular Expression Quick Guide
+
+^        Matches the beginning of a line
+$        Matches the end of the line
+.        Matches any character
+\s       Matches whitespace
+\S       Matches any non-whitespace character
+*        Repeats a character zero or more times
+*?       Repeats a character zero or more times 
+         (non-greedy)
++        Repeats a character one or more times
++?       Repeats a character one or more times 
+         (non-greedy)
+[aeiou]  Matches a single character in the listed set
+[^XYZ]   Matches a single character not in the listed set
+[a-z0-9] The set of characters can include a range
+(        Indicates where string extraction is to start
+)        Indicates where string extraction is to end
+
+
+Little programming language except it's character based. Not line based and not keyword based.
+it has certain active characters that the character means something versus the character represents the character itself
+
+REGEX MODULE
+* Before you use regular expression in your program ,you must import the library using 'import re'
+* You can use re.search() to check if the strings matches a regular expression,similar to using the find() method for strings
+*You can use re.findall() to extract portions of a string that match your regular expressions,similar to combination of find() and slicing: var[5:10]
+
+*Using re.search() like Find()
+
+hand = open('mbox-short.txt')
+for line in hand :
+    line =line.rstrip()
+    if line.find('From: ') >= 0 :   # searchs for From: all round the body of the mbox file
+        print(line)
+
+
+re import
+
+hand = open('mbox-short.txt')
+for line in hand :
+    line =line.rstrip()
+    if re.search('From: ', line) :
+        print(line)
+
+
+We fine-tune what is matched by adding special characters to the string
+
+
+
+
+hand = open('mbox-short.txt')
+for line in hand :
+    line =line.rstrip()
+    if line.startswith('From: ') : # looks for like that begins with From:
+        print(line)
+        
+        
+        
+        
+ re import
+
+hand = open('mbox-short.txt')
+for line in hand :
+    line =line.rstrip()
+    if re.search('^From: ', line) : # regex ^ means startswith
+        print(line)   
+        
+        
+Wild-card Characters :
+
+* The dot characters matches any characters. 
+* If you add the asterisk character,the character is 'any number of times':
+
+
+
+
+
+X-Sieve: CMU Sieve 2.3
+X-DSPAM-Result: Innocent
+X-DSPAM-Confidence: 0.8475
+X-Cotent-Type-Message-Body: text/plain
+
+
+^X. * :  # the above expression checked the regex. Line that startswith X,matches any character many times and has colon. Perfect wildcard
+
+(means startswith,X above,Match any character,many times,: colon above
+
+
+Fine-Tuning Your Match:
+
+Depending on how clean your data is and the purpose of your application,you may want to narrow your match down a bit
+
+Some times you want to be a little more clear on your match....
+
+X-Sieve: CMU Sieve 2.3 # match the above example
+X-DSPAM-Result: Innocent # match too
+X-Plane is behind schedule: two weeks # Matches too
+
+How can you be more clear what you want matched and not ?
+
+\S = Match any nonwhite space character
++ = One or more times
+
+^ X- \ S + : #Match the beginning of line for character capital X,that has a dash, X-. Then match any character other than white space\S,one or more times. folowd by :
+
+Applying it here : 
+
+X-Sieve: CMU Sieve 2.3 # match the above example
+X-DSPAM-Result: Innocent # match too
+X-Plane is behind schedule: two weeks #  There is white space here. Between the X and colon you can only have nonwhite space character
+
+FROM MATCHING TO EXTRACTING
