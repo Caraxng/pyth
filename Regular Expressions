@@ -128,7 +128,175 @@ X-Sieve: CMU Sieve 2.3 # match the above example
 X-DSPAM-Result: Innocent # match too
 X-Plane is behind schedule: two weeks #  There is white space here. Between the X and colon you can only have nonwhite space character
 
-FROM MATCHING TO EXTRACTING
+FROM MATCHING TO EXTRACTING DATA
+
+* re.search() returns True or False depening on whether the string matches the regular expression.
+* If we actually want the matching data to be extracted we use re.findall()
+
+import re
+x = 'My 2 favorite numbers are 19 and 42'
+y = re.findall('[0-9] +',x) # [0-9] is one character...0 or 1 or 2 to 9, + means one or mor times,one or more digits
+print(y)
+['2', '19', '42'] 
+
+[0-9] one or more digits
+
+list of three strings
+x = 'My 2 favorite numbers are 19 and 42'  # has aeiou but not uppercase so no match
+y = re.findall('[AEIOU] +',x)
+print(y)
+[] # prints empty list cause no match
+
+WARNING : GREEDY MATCHING 
+
+The repeat characters (* and +) push outward in both directions(greedy) to match the largest possible 
+string.
+
+import re
+x = 'From: Using the : Character'
+y = re.findall('^F.+ :',x) # starts with F,repeats a charact zero or more times,repeats one ore more times,last charac in the match is a :
+print(y)
+['From: Using the :]  #greedy matching. When it can match more than one overlapping string,it chooses the largest.
+
+why not From:
+
+
+NONGREEDY MATCHING
+
+Not all regular expression repeat codes are greedy. If you add the ? character,the * and + characters chill out a bit
+import re
+x = 'From: Using the : Character'
+y = re.findall('^F.+? :',x)  #+? means not greedy. Preferes the shorter of the strings
+print(y)
+['From:] 
+
+^F.+? :   Match the line where first charact starts with (^F)match any character in the line,one or more chacaters but not greedy(the first or shorter instance+?,
+          and finally that ends with a colon :
+          
+          
+FINE-TUNING STRING EXTRACTION :
+
+You can refine the match for re.findall() and separately determine which portion of the match is 
+to be extracted by using parentheses()
+
+
+From Stephen.marquard@uct.ac.za Sat Jan 5 19:14:16 2008
+y = ref.findall('\S+@\S+',x)    # at least one non whitespace character. Looking for string that has @ and one or mor non blank characters on both side
+print(y)
+['Stephen.marquard@uct.ac.za']
+\S+@\S+  none blank charactes,followed by one or more of it, that has @,then one ore non blank characters   
+
+We can give a matching string that is different from the extracting string using parenthesis
+From Stephen.marquard@uct.ac.za Sat Jan 5 19:14:16 2008
+y = ref.findall('^From (\S+@\S+)',x) # line starts with From, then a space, that has one or more nonblank charact,then @,then one or nonblank charac
+                                     # but the ^From is part of the match why didn't it extract. Because we use parentheses to show what we want extracted
+print(y)                 
+['Stephen.marquard@uct.ac.za']   () start your extraction and end your extraction inside the 
+
+^From makes for better matching. Parenthesis specifies what you want extracted
+
+
+STRING PARSING EXAMPLES :
+
+* Using Find and string slicing
+
+From Stephen.marquard@uct.ac.za Sat Jan 5 19:14:16 2008
+
+data = 'From Stephen.marquard@uct.ac.za Sat Jan 5 19:14:16 2008'
+atpos = data.find('@')
+print(atpos)
+21 
+
+sposs = data.find(' ',atpos) # find the empty space after atpos position
+print(sposs)
+31
+
+host = data[atpos+1 : sposs] @ position plus 1,u up to : space/sposs position uct.ac.za
+print(host)
+
+uct.ac.za
+
+* Double split pattern
+
+Sometimes we split a line one way and then grab one of the pieces of the line and split that pieces again.
+
+
+From Stephen.marquard@uct.ac.za Sat Jan 5 19:14:16 2008
+
+if line startswith('From ') :
+    line = line.rstrip()
+    words = line.split()  ['From', 'Stephen.marquard@uct.ac.za','Sat','Jan', '5', '19:14:16', '2008']
+    email = words[1]      Stephen.marquard@uct.ac.za  #
+    host = email.split('@') [ 'Stephen.marquard','uct.ac.za']
+    print(host[1])         
+    uct.ac.za
+
+* The Regex Version
+
+import re
+line = 'From Stephen.marquard@uct.ac.za Sat Jan 5 19:14:16 2008'
+y = re.findall('@ ([ ^]*)',line) find @ sign, extrac set of characters that are not blank[ ^],zero or moe times,which means to run till it finds a blank then stops
+print(y)
+['uct.ac.za']
+
+
+#Look through the line until you find an at sign. Then start extracting ( , match non blank charact [ ^], match many of then *, then end of extrac )
+
+Even Cooler Regex Version
+
+import re
+line = 'From Stephen.marquard@uct.ac.za Sat Jan 5 19:14:16 2008'
+y = re.findall('^From  .*@ ([ ^]*)',line) #From matches, then we see space, then any number of characts,then we see an @ sign, then start extracting till thereis blnk
+print(y)
+['uct.ac.za']
+
+starting at the beginning of the line look for the string 'From '
+
+First one might trigger on lines that we don't want. This is more precise.
+
+
+
+X-DSPAM-Confidence: 0.8475
+
+import re
+hand = open('mbox-short.txt)
+numlist = list()
+for line in hand :
+    line = line.rstrip()
+    stuff = refindall('^X-DSPAM-Confidence: ([0-9 .] +)',line)
+    if len(stuff) != 1 : continue # if the number of xtracted items (num in list),that is len of stuff is not equal != to 1, if what is xtracted is not one thing
+                                  # which should be cause is this 0.8475,continue.
+    num = float(stuff[0]) #it's = to 1, and it's you assign it a variable and convert to float since it's float. Positionally which is 0
+    numlist.append(num)   # append stuff is now num now append it to the empty list
+print('Maximum:',max (numlist))
+maximum: 0.9907
+
+[0-9.] ....a single character ,+ one or more times 
+
+
+
+Escape Character
+
+If you want a special regular expression character to just behave normally (most of the time),you prefix it with \ 
+
+import re
+x = 'We just received $10.00 for cookies. '
+y = re.findall('\$ [0-9.] +',x) # find a dollar sign followed by one or more digits or dots
+print(y)
+['$10.00']
+
+
++ at least one or more,  $ real dollar sign, 0-9. a digit or period
+
+
+
+
+
+
+
+
+
+
 
 
 
