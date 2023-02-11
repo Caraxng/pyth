@@ -1,1 +1,197 @@
 
+Chapter 12 Network Programming 
+
+
+Transport Control Protocol (TCP)
+
+* Built ontop of IP (internet protocol)
+* Assumes IP might loose some data.
+  - stores and retransmits data if it seems to be lost.
+* Handles flow control using a transmit window
+* Provides a nice reliable pipe
+
+A TCP architecure runs our network. 
+
+
+
+TCP Connections/ sockets  
+
+In computer networking, an internet socket or network socket is an endpoint of a bidirectional inter-process
+communication flow across an internet protocol-based computer network such as the internt
+
+Process - internet - process
+
+In nerd terms we call these sockets,and that is one process running on one computer ,another process running on a second computer 
+connected through the internet somehow,and one comp speaks into that socket and it comes out and the other computer returns something
+and it comes.
+A bidirectional process of data which is a series of an effect . Data phone calls between apps
+so the apps might be on your side . Might be ur browser..on the other side a web server ,might internet ,iis, web server, apache, javatomcat
+there is another program and you are making phone calls between these programs...
+
+In general these serves stay up all the time and you just make a request when you want on your program and that is what we are going to do and this
+is what we call a socket.
+That connection,that data phone call between browser or computer and server is what we call a socket.
+
+TCP Port Numbers :
+* A port number is an application specific or process specific software communication endpoint
+* It allows multiple networked applications to coexist on the same server.
+* There is a list of well-known TCP port numbers
+
+You have to decide which systems you want to talk to and which services in those systems or which process 
+
+Port numbers are best thought of as extensions on phone. So one organization has one phone number,and says please enter the extention of the party you
+would like to talk to
+
+Ports are like i am a server and i am on the internet please enter the  extension of the process you would like to talk to.
+
+For example there are process known to hang out on computers
+
+www.umich.edu
+
+incoming email = 25
+login = 23   insecure login 
+web server = 80, 443 80 insecure,secure 443
+personal mail box = 109, 110
+
+
+By conention, we have standards that they tell us what to roughly expect at those ports
+telnet  23 login
+ssh 22 secure login
+HTTP 80 
+HTTPS 443 secure 
+SMTP 25 mail
+IMAP 143,220,993, mail retrieval 
+POP 109/110 mail retrieval
+DNS 53 Domain Name
+FTP 25 file transfer 
+
+If you are talking to port 80,you expect to talk to a web server or http server . Are typical,commonely used default extension.
+for various network application processes that are serving us data
+
+Now some times you will go to a url and will see the portnumber in the url if the url is running on a non standard port 
+
+
+Sockets in Pytong.....
+
+Python has built in support for TCP sockects.
+
+import socket
+mysock = socket.socket(socket.AF_INET, socket.socket_STREAM)
+mysock_connect( ('data.pr4e.org' ,80) )
+
+host =  data.py4e.org,  port =  80
+
+socket is built in function,import and call it 
+the key to a socket,it's like an unponed file handle. .5 of a file handle,an outward looking thing. That's not yet connected. 
+
+The above says,we make a socket that goes across the internet,it's a stream soket which means that it's a series of characters
+that come one after another rather than a series of blocks of text. There is another kind that's harder to deal with 
+Creates a socket but does not associated it : mysock = socket.socket(socket.AF_INET, socket.socket_STREAM)
+a socket object...stored in the variable mysock
+mysock.connect
+makes the connection to the declared host
+mysock_connect( ('data.pr4e.org' ,80) ) # data.py4e.org is like the phone number while 80 is like the phone ext
+connect()
+
+the call might blow up if there is not sitting in the process
+
+*Application protocols
+Now that we have a socket,we are going to ask ourselves what kind of data are we going to send and what kind of data are we going to expect to receive
+across that socket
+
+APPLICATION PROTOCOL
+
+* Since TCP and python gives us a reliable socket, what do we want to do with the socket,what problem do we want to solve
+* Application Protocol
+ * Mail 
+ * World Wide Web
+Your socket basically functions at this level,your application is saying, make me a socket,which is sort of this endpoint,and then the connect actually
+connects to an application on the far side and there is a port involved might be port 80 and this is the file host and that could be py4e.org
+So the socket is solving this 
+and the question then is what are we going to send  and what are we going to receive /expect to get back.
+And thats wht we call the app protocol
+
+HTTP : HYPERTEXT TRANSFER PROTOCOL
+
+* The dominant application layer protocol on the internet
+* Invented for the web to retrieve html,images documents etc
+* Extended to be data in addition to documents, RSS,Web Services, Etc, Basic concept, make a connectn,request a documnt,retrieve a documnt,close the connection.
+There are many application protocols like mail,login, ftp,ssh we use http here
+
+HTTP
+
+Hypertext Transfer Protocol is the set of rules to allow browsers to retrieve web documents from servers over the internet
+
+What Is a Protocol ?
+
+A set of rules all parties follow so that we can predict each others behavior
+ * And not bump into each other
+  * On two-way roads in the USA drive on the right hand side
+  * On two-way roads in the UK drive on left-hand side of the road
+
+Look at a typical URL
+http://www.dr-chuck.com/page1.htm
+protocol   host   document
+
+Getting Data From The Server :
+
+* Each the user clicks on the anchor tag, with an href= value to switch to a new page,the browser makes a connection to the web server,
+and issues a get request,to get the content of the page at the specified url
+* The server returns the html document to the browser which formats and displays the document to the user
+
+
+http is very simple protocol invented in 1989 and 1990 by Tim Berners-Lee and Robert Cailliau at CERN 
+now used for way more than retrieving docs as we will see in upcoming chapters. 
+
+Request response cycle  clicking around a website
+
+Internet Standards 
+
+* The standards for all the internet protocols (inner workings) are developed by an organization
+* Internet Engineering Task Force (IETF
+ietf.org
+* Standards are called RFCs request for comments
+
+PART 3 
+
+
+Let's Write Webrowser Using Python :
+
+We played with protocol and used telnet to do it by hand. Now we will do it in py
+
+An HTTP REQUEST IN PYTHON
+
+import socket # import sock
+mysocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # make the socks. stream based socked suitable for going across the net
+mysock.connect( ('data.pr4e.org', 80)) # connect  the socks. Like rings phone call, connect to data.pr4e.org in port 80 which will be a http webserver otherwise blowup
+cmd = 'GET http://data.pr4e.org/romeo.txt HTTP/1.0\n\n'.encode() # we are the webbrowser,we talk first
+mysock.send(cmd) # says send it 
+
+while True :
+    data = mysock.recv(512)
+    if (len(data) < 1) : 
+        break
+    print(data.decode())
+mysock.close()
+
+first three lines import socket .....  
+
+Your program
+socket
+connect      all socket port  80   webpages
+send
+receive
+
+
+
+
+
+
+
+
+
+
+
+
+
+
