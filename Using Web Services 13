@@ -1,1 +1,82 @@
+Using Web Services 
+Chapter 13 
+Part 1
+Data On The Web :
 
+* With HTTP request/response cycle( learned about sockets,urllib,how to pull out html off the web)well understood and well supported,there was a natural move 
+towards exchanging data between programs using these protocols
+* We needed to come up with an agreed way to represent data going between applications and across networks
+* There are two commonly used formats : XML and JSON
+
+Now using same request response cycle to retrieve information specifically designed for programmatic consumption
+
+Why not produce data in a format that makes good sense to a program because programs wanna talk to each other. If you recall the whole idea of sockets is one applicat
+ion process sending data to another application
+
+
+SENDING DATA ACROSS THE NET
+
+PHP                                  JavaScript
+Array                                  Object
+
+{
+
+         'name':'Chuck'
+         'phone':'303-4456'
+
+
+}
+Python                                 Java
+Dictionary                            HashMap
+
+a.k.a wire protocol ,what we send on the wire
+ different languages and they are all connected and they might want to send data true the network php,java programs and we have to decide on a protocol 
+ that is indepedent of prog language and we call that the wire protocol.
+ 
+ Because if you were to take some connection and watch the exact characters that go back and fort,thats what you would see if you are monitoring the wire
+ 
+ AGREEING ON A WIRE FORMAT
+ 
+ Python 
+ 
+ Serialize
+ 
+ <person>
+ <name>
+ Chuck
+ </name>
+ <phone>
+ 303-4456
+ </phone>
+ </person>
+ 
+ De-serialize   Java Hashmap
+ 
+ xml
+ 
+ Another format 
+ 
+ JSON
+ JavaScript Object Notation
+ 
+ Simpler and easier but not precise as xml
+ 
+ PHP                                  JavaScript
+Array                                  Object
+
+{
+
+         'name':'Chuck'
+         'phone':'303-4456'
+
+
+}
+Python                                 Java
+Dictionary                            HashMap
+
+
+
+json is very common used in apis and rest
+
+
+ 
