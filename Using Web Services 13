@@ -79,4 +79,96 @@ Dictionary                            HashMap
 json is very common used in apis and rest
 
 
- 
+XML 
+
+Extensible Markup Language 
+
+* Main purpose is to help information systems share structured data
+* Started as simplified subset of the standard generalized markup language SGML and is designed to be relatively human-legible
+
+XML TERMINOLOGY
+
+Tags : Indicate the beginning and ending of elements 
+
+Attributes : Key/Value pairs on the opening tag of xml element
+
+Serialize/De-serialize: Convert data in one program into a into a common format that can be stored and or transmitted between systems in programming language
+independent manner
+
+XML Basics 
+
+<Person>         #start tag
+ <name> Chuck</name> # end tag
+ <phone type="int'l">  #attribute  key equals value
+ +178049985896   #text content
+ </phone>
+ <email hide="yes"/>  # self closing  tag where you don't have a closing tag. All together. All needed data is in attribute.
+</person>       # end tag
+
+Same as html difference we name the tag anything we want. 
+
+
+WHITE SPACE 
+
+Xml doesn't care much about whitespace. It does in text areas. 
+Line ends do not matter.
+White space is generally discarded in text elements.
+We indent only to be readable
+
+
+XML Elements or Nodes
+
+Simple and complex elements
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+XML TREE
+
+<a>
+ <b>x</b>
+ <c>
+  <d>y</d>
+  <e>z</e>
+ </c> 
+</a> 
+
+
+Elements & Text 
+
+XML Texts And Attribute :
+<a>
+ <b W="5">x</b>
+ <c>
+  <d>y</d>
+  <e>z</e>
+ </c> 
+</a> 
+
+
+XML As Paths :
+
+<a>
+ <b>x</b>      a/b/b   X
+ <c>
+  <d>y</d>     a/c/d/  Y
+  <e>z</e>     a/c/e   Z
+ </c> 
+</a> 
