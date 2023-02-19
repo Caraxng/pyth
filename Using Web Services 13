@@ -172,3 +172,48 @@ XML As Paths :
   <e>z</e>     a/c/e   Z
  </c> 
 </a> 
+
+
+XML Schema
+
+* Description of legal format of an xml
+* Expressed in terms of constraints on the structure and contents of documents
+* Often used to specify a contract between systems ' my systems only accepts xml that conforms to this particular schema '.
+* If a particular piece of xml meets the specification of the particular schema ,it's said to validate
+
+
+XML Validation
+
+             xml document
+                                              Validator
+            xml schema contract 
+            
+
+XML Document :
+
+
+<person>
+ <name>Chuck</name>
+ <phone>303-4456</phone>
+</person>      
+                                             Validator . XML Doc and Schema points to a validator
+
+SCHEMA CONTRACT
+
+<xs: complexType name="person">
+ <xs:sequence>
+  <xs:element name="lastname" type"xs:string"/>
+  <xs:element name="age" type"xs:integer"/>
+  <xs:element name="dateborn" type"xs:date/>
+ </xs:sequence>
+</xs:complexType> 
+
+
+XML SCHEMA LANGUAGES
+
+* Document Type Definition DTD
+ * en.wikipedia.org/wiki/Document_Type_Definitionn
+* Standard Generalized Markup Language (ISO 8879:1986 SGML)
+ * en.wikipedia.org/wiki/SGML
+* XML Schema for W3C (XSD)
+ * en.wikipedia.org/wiki/XML_Schema_(W3C)
