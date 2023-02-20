@@ -172,3 +172,130 @@ XML As Paths :
   <e>z</e>     a/c/e   Z
  </c> 
 </a> 
+
+XSD XML Schema 
+
+* We will focus on the world wide web consortium W3C version
+* It's often called 'w3 Schema' because Schema is considered generic
+* More commonly it's called xsd because the file extension is xsd
+
+XSD STRUCTURE
+
+<person>                                # also a complexType
+ <name>Chuck Severance</name>
+ <age>17</age>                          # all xs:element as well
+ <dateborn>2001/04/17</dateborn>
+</person>
+
+
+<xs:complexType name="person">
+ <xs:sequence>                          # xs:sequence
+  <xs:element name="lastname" type="xs:string"/>        # xs:element
+  <xs:element name="age" type="xs:integer/>
+  <xs:element name="dateborn" type="xs:Date"/>
+ </xs:sequence>
+</xs:complexType>                         #xs:complexType
+
+
+
+
+XSD CONSTRAINTS 
+
+xsd Schema
+
+<xs:element name="person">
+ <xs:complexType>
+  <xs:sequence>
+   <xs:element name="full_name" type="xs:string"
+    minOccurs="1" maxOcurs="1" />    # minimum number of times it can occur
+   <xs:element name="child_name" type="xs:string"
+    minOccurs="0" maxOccurs="10" />
+  </xs:sequence>
+ </xs:complexType>
+</xs:element> 
+
+XML
+
+<person>
+ <full_name>Tove Refsnes</full_name>   # occurs once
+ <child_name>Hege</child_name>        # Ouccurs 4 remaining 6 as par above maxOccur constraint for child_name
+ <child_name>State</child_name>
+ <child_name>Jim</child_name>
+ <child_name>Borge</child_name>
+</person> 
+
+
+XSD Data Types 
+
+<xs:element name="customer" type="xd:string"/>
+<xs:elemant name="start" type="xs:date"/>
+<xs:elemant name="startdate" type="xs:dateTime"/>
+<xs:element name="prize" type="xs:decimal"/>
+<xs:element name="weeks" type="xs:integer"/>
+
+It's common to represent time in UTC /GMT given that servers are often scattered around the world.
+
+xml
+
+<customer>John Smith</customer>
+<start>2022-09-24</start>
+<startdate>2022-05-30T09:30:10Z</startdate>
+<prize>999.50</prize>
+<weeks>30</weeks>
+
+ISO 8601 Date/Time format:
+
+
+
+Year  Month Day Time of Day
+
+ |      |         |
+2022-  05-  30T09:30:10Z
+              |        |
+             Time     Time zone (In UTC/GMT rather than local time)
+
+
+
+XML In Python
+
+import xml.etree.ElementTree as ET # must be imported. The name of the library is etree.elementTree as ET shortctut for it
+
+data = '''<Person>       #normally the lib ought come from a network. But it's put in the string object(data. Triple quoted string
+ <name> Chuck</name> 
+ <phone type="int'l">  
+  +178049985896                        # XML
+ </phone>
+ <email hide="yes"/> 
+</person>'''
+
+tree = ET.fromstring(data) #tree object equals fromstring data. pass a string of data
+print('Name:',tree.find('name').text) #for Name,in tree find name and print the text in the name element which is chuck
+print('Attr:',tree.find('email').get('hide'))  #for Name,in tree find name and print the text in the name element which is chuck
+
+
+Another example:
+
+import xml.etree.ElementTree as ET
+
+input '''<stuff>
+ <users>
+  <user x="2">
+   <id>001</id>
+   <name>Chuck</name>
+  </user>
+  <user x="7">
+   <id>009</id>
+   <name>Brent</name>
+  </user> 
+ </users>
+</stuff>  
+   
+stuff = ET.fromstring(input)
+lst = stuff.findall('users/user')
+print('User count:',len(lst))
+for item in lst:
+    print('Name', item.find('name').text)
+    print('Id', item.find('id').text)
+    print('Attribute',item.get('x'))
+
+    
