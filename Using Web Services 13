@@ -173,6 +173,51 @@ XML As Paths :
  </c> 
 </a> 
 
+XML Schema
+
+* Description of legal format of an xml
+* Expressed in terms of constraints on the structure and contents of documents
+* Often used to specify a contract between systems ' my systems only accepts xml that conforms to this particular schema '.
+* If a particular piece of xml meets the specification of the particular schema ,it's said to validate
+
+
+XML Validation
+
+             xml document
+                                              Validator
+            xml schema contract 
+            
+
+XML Document :
+
+
+<person>
+ <name>Chuck</name>
+ <phone>303-4456</phone>
+</person>      
+                                             Validator . XML Doc and Schema points to a validator
+
+SCHEMA CONTRACT
+
+<xs: complexType name="person">
+ <xs:sequence>
+  <xs:element name="lastname" type"xs:string"/>
+  <xs:element name="age" type"xs:integer"/>
+  <xs:element name="dateborn" type"xs:date/>
+ </xs:sequence>
+</xs:complexType> 
+
+
+XML SCHEMA LANGUAGES
+
+* Document Type Definition DTD
+ * en.wikipedia.org/wiki/Document_Type_Definitionn
+* Standard Generalized Markup Language (ISO 8879:1986 SGML)
+ * en.wikipedia.org/wiki/SGML
+* XML Schema for W3C (XSD)
+ * en.wikipedia.org/wiki/XML_Schema_(W3C)
+
+
 XSD XML Schema 
 
 * We will focus on the world wide web consortium W3C version
@@ -298,4 +343,38 @@ for item in lst:
     print('Id', item.find('id').text)
     print('Attribute',item.get('x'))
 
-    
+ 
+ JSON   
+
+ Javascript Object Notation
+
+ * Douglas Crockfold Discovered Json
+ * Object literal Notation in Javascript
+
+ You are likely to use more json than xml. XML better for rich and hierrachical documents. Json is best for pulling data out of system
+ and moving it between two systems with the minimum
+ looks a lot like literal notation for javascript.
+ Looks a lot like python literal notation for objects and for lists. 
+
+ JSOn is not rfc or standardized. The inventor registered it and documented it and people started using it and it became popular.
+
+ It has javascript literal syntax.
+
+*Json represents data in nested list and dictionaries
+ import json
+
+ data = '''{
+    "name" : "chuck",
+    "phone"  : {
+      "type" : "intl" ,
+    "number" : "+1 7343034456", 
+    }
+    "email" : {
+      "hide" : "yes",
+
+    }
+ }'''
+
+ info = json.loads(data)
+ print('Name:',info["name"])
+ print('Hide:',info["email"]["hide"])
