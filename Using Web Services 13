@@ -358,23 +358,185 @@ for item in lst:
 
  JSOn is not rfc or standardized. The inventor registered it and documented it and people started using it and it became popular.
 
- It has javascript literal syntax.
+ It's derived from javascript literal syntax.
 
 *Json represents data in nested list and dictionaries
  import json
 
+Some python process json
+
  data = '''{
-    "name" : "chuck",
-    "phone"  : {
+    "name" : "chuck",   # key value pairs..both have quotes..looks a lot like python. kv pair as a sting
+    "phone"  : {     # can have objects within objects. Inside data object is this phont object
       "type" : "intl" ,
-    "number" : "+1 7343034456", 
+    "number" : "+1 7343034456", #kv within those contained objects
     }
-    "email" : {
+    "email" : {  # another object inside object
       "hide" : "yes",
 
     }
  }'''
 
- info = json.loads(data)
+ info = json.loads(data) # pass the string into json library load s, loads means load from string , parses it and returns a dict
  print('Name:',info["name"])
  print('Hide:',info["email"]["hide"])
+
+ json is structured reprent and simpler than xml
+ in python everything either comes back as a list or dict r dict within a list or dict within a lis
+
+ 
+ Another more complex example :
+ list of two dictionaries...list because it starts with square bracket dict because it's key value
+ import json
+input = '''[
+  { "id" : "001",
+    "x" : "2",
+    "name" : "chuck"
+  },
+  { "id" : "009",
+    "x" : "7",
+    "name" : "chuck"
+  },
+]'''
+
+info = json.loads(input)  # info a list with two items
+print('User Count:',len(info))
+for item in info:
+    print('Name:',item["name"])
+    print('Id:',item["id"])
+    print('Attribute:',item["x"])
+
+
+
+Service Oriented Approach part 5
+
+Approach to solving a complex application problem where all the data isn't present in one computer and somehow spread out over the internet connected by the internet or internal network
+
+The idea is that some applications cannot contain everything.
+
+* Most nontrivial web applications use services
+* They use services from other applications 
+   * Credit card charge
+   * Hotel reservation systems
+* Services publish the rules applications must follow to make use of the services
+(API) application programming interface
+
+
+       APPLICATION
+
+         ^  ^  ^
+         |  |  |
+         |  |  |
+   
+          APS's
+
+
+
+
+Multiple Systems 
+
+* Initially- two systems cooperate and split the problem.
+* As the data/service become useful-multiple application want to use the application/information
+
+
+
+GEOjson  Part 6
+
+Application Programming Interface
+The API itself is largely abstract in that it specifies an interface and controls the behavior of the objects specified in that interface. The software that provides the functionality described by an API is said to be an implementation of the API. An API is typically defined in terms of the programming language used to build an application.
+
+Google Maps API
+
+http://maps.googleapis.com/maps/api/geocode/json?address=Ann+Arbor%2C+MI
+
+
+Example 
+
+import urllib.request, urllib.parse, urllib.error  # import urllib
+import json    #import json
+
+serviceurl = 'http://maps.googleapis.com/maps/api/geocode/json?'  #grab the url
+
+while True :    #little while loop that wil ask for location
+    address = input('Enter Location:')
+    if len(address) < 1 : break
+    
+    url = serviceurl + urllib.parse.urlencode({'address': address})  #the lib takes the url
+
+    print('Retrieving:',url)  #get the url,retrieve
+    uh = urllib.request.urlopen(url) #open the url
+    data = uh.read().decode() #read and decode the url
+    print('Retrieved':,len(data),'Characters') # print length of characters retrieved. It's string after decoding
+
+    try:  # we take the data and pass it to json. The try worked here
+        js = json.loads(data)
+    except:
+        js = None
+    if not js or 'status' not in js or js['status'] != 'ok':
+        print('==== Failure To Retrieve ====')
+        print(data)
+        continue
+    lat = js["results"][0]["Geometry"]["location"]["lat"]
+    lng = js["results"][0]["geometry"]["location"]["lng"]
+    print('lat', lat,' lng', lng)
+    location = js['results'][0]['formatted_address']
+    print(location)
+
+
+
+Output:
+
+Enter Location : Ann Arbor ,MI
+Retrieving: http://maps.googleapis.com/.....
+Retrieved: 1669 Characters
+lat 4.22808256 lng -83.7430378
+Ann Arbor,MI, USA
+Enter Location:
+
+
+
+http://maps.googleapis.com/maps/api/geocode/json?address=Ann+Arbor%2C+MI
+
+
+"status" : "ok"
+"results" : [
+    {
+        "geometry" : {
+            "location_type" : "APPROXIMATE",
+              "location" : {
+                   "lat" : 4.22808256,
+                    "lng" : -83.7430378
+            }
+        },
+        "address_components" : [
+            {
+                "long_name" : "Ann Arbor",
+                "type": [
+                    "locality"
+                    "political"
+                ],
+                "short_name" : "Ann Arbor"    
+            }
+        ],
+        "formatted address": "Ann Arbor, MI, USA",
+        "type": [
+            "locality"
+            "political"
+        ]    
+    }
+]
+
+
+PART 7 : Twitter 
+
+API Security and Rate Limiting 
+
+* The compute resources to run these API's are not free
+* The data provided by these ApI's is usually valuable 
+* The data providers might limit the number of requests per day,demand an API key or even charge for usage
+* They might change the rules as things progress 
+* 
+
+
+
+
