@@ -1,1 +1,491 @@
+CHAPTER 14 Python Objects 
+
+PART 1
+
+     WARNING 
+
+* This lecture is very much about definitions and mechanics for objects.
+* This lecture is a lot more about 'how it works' and less about 'how you use' it 
+* You won't get the entire picture until this is all looked at in the context of a real problem.
+* So please suspend disbelief and learn technique for the next 50 of so slides
+
+
+Object Oriented :
+
+* A program is made up of many cooperating objects.
+* Instead of being the whole project, each object is a little 'island' within the program and cooperatively working with other objects
+* A program is made up of one or more objects working together
+
+OBJECT
+
+* A bit of self-contained code and data
+* A key aspect of the object approach is to break the problem into smaller understandable parts ( divide and conquer)
+* Objects have boundaries that allow us to ignore un-needed details.
+* We have been using objects all along.  String objects, integer objects, Dictionary objects,list objects etc
+
+Objects get created and used 
+
+
+
+           Dictionary
+             ^    /
+             |   /
+             |  /
+             | L
+Input ---> Object ---->  Object----
+             | ^               \  |
+             | |                \ |
+             | |                 \|
+             v |                  |
+           String                 v
+                                Output
+      
+
+Even strings have objects. All along we have been using objects ,from the beginning,first week, first lecture we were using objects and we have been using them all along.
+
+
+
+           Code/Data
+             ^    /
+             |   /
+             |  /
+             | L
+Input ---> Code/data ---->  Code/Data----
+             | ^               \  |
+             | |                \ |
+             | |                 \|
+             v |                  |
+          Code/Data               v
+                                Output
+
+                                
+
+
+You can think of everything string and every dictionary  as a little program all by itself. And has a bit of code and a bit of data. ANd so our string has a data which includes all the characters that make up a string,then there is a method called upper case or lower case,rstrip,strip etc
+
+So it's like they are almost little bit of programs that have input and output themselves and we can make them,lots of them. There are lots of cooperating objects that make up an application.
+
+
+Objects: 
+Objects hide details, they allow us to ignore the detail of 'the rest of the program'.
+
+Objects form boundaries and within the boundaries and if you are inside the object,you can say look i am going to be build you a string object,or beautiful soup object,or o database object,i am going to be bulld this capability and i am going to give it to you in the form of an interface.And i don't really care how you use it.
+
+I am going to make an object and you are going to use it and the maker of that oject doesn't have to know every thing about the use of that object. 
+But just like inside the object,you don't have to worry about what you will do with it outside of it. When you are outside the object,you don't have to worry about what is going on inside of it. 
+
+We as the user of the object we talk to it's interface and we get things from it and give things to it and use functionality within that object but we don't have to look inside of it(the object) we cn just oh is like a nice magical thing. 
+*read the documentaion or the webpage and told us to do this ,this and this
+It's the isolation boundary that works for the programmer who is writing the object and the programmer who's using the object.
+
+SOmE DEFINITIONS 
+WOrds to understand
+
+Class:
+A template - A dog 
+
+Method or Message :
+Defined capability in a class - bark() / function in a class
+
+Field or Attribute:
+A bit of data in a class - length (variable in a class)
+
+Object or Instance:
+A particular instance of a class - Lassie
+
+class is not the thing, but the template ,the shape of the thing, like the mold you pour melted iorn to forge steel, 
+
+Objects are the things that are made from the template,the cookies made from the cookie pan
+
+the template defines the shape and nature of a class. The code we write is a class code and later we say lets take that class code and make ourselves an object
+
+NOW 
+As we are defining a class,we have two basic things that we put in a class
+
+* Method
+A code, a function that lives inside of a class. 
+
+* Field or Attribute:
+Are data items in a class. So there are variables,that are defined in a class.
+
+Functions and variables can be in all parts of your program but if you are building a class that will have function and data,then it becomes method and attribute
+
+TERMINOLOGY : CLASS 
+
+Defines the abstract characteristics of a thing(an object)including the things characteristics(it's attributes,fields or properties) and the things behaviors(the things it can do or methods,operations or features). One might say that a class is a blueprint or a factory that describes the nature of something. For example, the class Dog, would consist of traits shared by all dogs such as breed,fur color(characteristics),and the ability to back and sit(behaviors)
+
+A PATTERN EXAMPLE OF A CLASS
+
+A pattern(exemplar) of a class. The class of dogs by listing the possible characteristicsand behaviors they can have; the object Lassie is one particular dog,with partcular versions of the characteristics. A Dog has fur;Lassie has brown-and-white fur
+
+Terminology : Instance /Object
+
+One can have an instance of a class or a particular object. The instance is the particular object created at runtime. In programmer jargon the Lassie object is an instance of the dog class( a kind of thing. A template). The set of values of the attributes of a particular object is called it's state. The object consist of state and the behavior that's defined in the object class.
+
+Object and instance are often used interchangeably.
+
+We can make many objects from one class.
+Just like many cookies from one cookie cut.
+
+PART 2
+A SIMPLE CLASS:
+
+Template for making PartyAnimal objects
+
+
+* class is a reserved word
+* 
+
+
+class PartyAnimal:
+  x = 0   # <--------------- each party animal object has a bit of data
+
+  def party(self) :       # * each partyanimal object has a bit of code
+   self.x = self.x + 1
+   print("So Far",self.x)
+
+an = PartyAnimal()   # <----------------- Construct a PartyAnimal object and store in an
+
+an.party()      # * Tell the an object to run the party() code within it. 
+an.party()            
+an.party()             # <------------------> PartyAnimal.party(an)
+
+
+
+
+
+class PartyAnimal:    #this is the class with the resev word class: It's the template and the 
+                       #name is PartAnimal and normally has to    things
+  x = 0   #     # 1.  an attriubute or variable
+  
+  def party(self) :        #2. A method function...here def party function within PartyAnimal class.(self) is a way meth lines
+                           # below will fall back to the variable x
+   self.x = self.x + 1     # Lines 1 to 5 are not executing any code,they are remembering template,defining the class PartyAnimal
+   print("So Far",self.x) # It's what we call constructiing using a PartyAnimal temp or class we are making PA and once done
+                          # we stick into variable an
+an = PartyAnimal() #an became self, the method created in PartyAnimal class because..self is the paramter of PartAnimal methd/func party
+
+an.party()       # and then we are going to call this party ,this party method three times
+an.party()      #  self ends up being an alias of an      
+an.party()      #look at it as equivalent of PartyAnimal.party (an) calling the party method within the party animal class
+
+'self' ends up  being 'an' alias of an each time an.party() is called
+an became self, the method created in PartyAnimal class because..self is the paramter of PartAnimal methd/func party
+
+
+A Nerdy Way To FInd Capabilities :
+
+* The dir() command lists capabilities
+* - ignore the ones with underscores(_) these are used by python itself.
+* The rest are real operations that the object can perform. 
+* It's like type()---> which tells us something about a variable 
+x = list()
+type(x)
+ <type 'list'>
+
+dir(x)
+['_add_', '_class_','_contains_', etc (python capabil itself)
+'append', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort'
+
+ ]
+
+
+x. sort()
+
+the sort method within the x.
+the dot . operator is the operator that we use to look something up within an object...x.sort is used to sort contents of the list
+x .
+
+x. sort ,dict.items are all methods withnin the corresponding class
+
+TRY DIR WITH A String
+
+y = 'What a joy'
+print(y)
+
+dir(y)
+
+
+y.rstrip()   y object, . object look up operatpr,rstrip method/function
+
+
+-We Can Use Dir To Find The Capabilities Of Our Newly Created Classe-.
+
+
+class PartyAnimal:
+   x = o
+   def party(self):
+     self.x = self.x + 1
+     print('So Far',self.x)
+
+an = PartyAnimal
+
+an.party()
+an.party()
+an.party()
+
+Output :
+So Far 1
+So Far 2
+So far 3
+
+
+
+print('Type ', type(an))
+print('Dir', dir(an))
+
+type <class, '_main_.PartyAnimal'>
+dir ['_class_',...'party','x']
+
+
+
+an is a variable that contains the object of PartyAnimal class.... it practically 
+
+you can also do
+an.x or an.party... dot is the object look up operator that says look up in the object an for the thing x or look up in the object
+an for the thing party
+
+Part 3 :
+
+OBJECT LIFECYCLE :
+Act of creating and destroying objects .
+
+* Objects are created,used,and discarded.
+* We have special blocks of code(methods) that get called.
+ * At the moment of creation(constructor)
+ * At the moment of desctruction( destructor)
+* Constructors are used a lot
+* Destructors are seldom used.  
+
+Constructor :
+The primary purpose of the constructor is to set up some instance of variables to have the proper initial values when the object is created.
+
+
+class PartyAnimal:
+  x = 0
+
+  def _init_(self):
+    print('i am constructed')
+
+  def party(self):
+    self.x = self.x + 1
+    print('So Far',self.x)
+
+  def _del_(self):
+    print('i am destructed',self.x)
+
+an = PartyAnimal() # Called PA class
+an.party()
+an.party()
+an = 42   # an is now free and reassigned to 42
+print('an contains',an)
+
+Output :
+
+I am constructed # runs after PA call
+So Far 1  # calling party(method) inside an(PartyAnimal)
+So Far 2 # another call
+I am destructed  # Now still in this class there is still an unrun code,the last block which destroys the class object
+an contains 42  
+
+
+
+constructor and destructor are optional. constructor typically used to set up variables. The destructor is seldom used.
+
+
+In object oriented programming a constructor in a class is a special block of statement called when an object is created. 
+
+
+=> Many Instances 
+
+* We can create lots of objects- the class is the template for the object
+* We can store each distinct object in it's own variable. 
+* We call this having multiple instances of the same class. 
+* Each instances has it's own copy of the instance variable
+
+All we have done so far is make a class and one object,one instance. Each of these objects can be installed in it's own variable 
+we hve the variable an and we have been using it. But the more intersting thing begins to happen when we have multiple instances of the same class sitting in different variables. And it has it's own copy of the instance variables.
+
+
+class PartyAnimal:
+  x = 0
+  name = " "
+
+  def __init__(self, z): #PA constructed. Self is the PA class object party parameter. z becomes the argument in PA call below 'sally'
+    self.name = z                                           #blank name up becomes z
+    print(self.name,'Constructed')
+
+  def party(self) :                                                #class object party
+    self.x = self.x + 1                                          #self.x var created to become self.x (0) + 1 which is 1
+    print(self.name,'party count',self.x)                   # 
+
+s = PartyAnimal("sally")                                          # z becomes sally
+s.party()  # party call
+
+j = PartyAnimal("jim")                                               # z becomes jim
+j.party()
+s.party()
+
+OutPut :
+
+sally Constructed
+sally party count 1
+jim Constructed
+jim party count 1
+sally party count 2
+
+
+* Two independent instances 
+
+
+ ______________________
+|S                     |
+|     X   2            |    # When s is called it makes one instance of the class...mks an object and store in var s
+|                      |   # there is variable x in there,name in there,there is init and party method
+|   Name:  sally       |   # all in this instance
+|                      |
+|______________________|
+
+* We have two objects,one in the variable s and one in the variable j
+________________________
+| J                     |
+|       X   1           |
+|                       | # same whole new instance...stored in j
+|     Name: jim         |
+|                       |
+|                       |
+|_______________________|
+
+We have two objects one in var s and one in var j,and they have seperate copies of there instance variable (x and name)
+* The key is every time we do our new construction it duplicates this and there is another copy. So there is an x within s and an x within j
+s.x is this s = PartyAnimal("sally")   variable and j.x is this variable j = PartyAnimal("jim") 
+
+Constructors(def _init_) can have additional parameters(z),these can be used to set up instance variables (name or/& self.name) for the particular instances of the class.
+(i.e for the particular object)
+
+
+On the constructor (self, z) self comes in automatically when we call the PartyAnimal class because..it's the parameter
+but if we put a parameter on the constructor call s = PartyAnimal('sally'),sally is the parameter,it comes in,as the z variable...second
+parameter of the constructor
+so self is the object itself, and z is whatever parameter/arguement we put on the constructor call(s = PartyAnimal(==>'sally'<==))
+
+PART 4 :
+INHERITANCE 
+
+Notion of inheritance. It's a form of code reuse. One of the more advanced aspect of object oriented programming. 
+
+Inheritance :
+
+* When we make a new class, we can reuse an exisiting class and inherit all the capabilities of an exisiting class and then add then add our own little bit to make our new class.
+* Another form of store and reuse
+* Write once ,- reuse many times.
+* The new class(child),has all the capabilities of the old class(parent)- and then some more
+
+Extending a class. Subclassing
+It's sort of a situation where you are like i got this code and i got this data and ijust need to add a few things to it and then i will have a whole new thing. As you design objects and what we call object hierrarchies you often do this. A form of real clever code resue
+
+But you don't necessarily need to think you need to know when to use this or why to use this. Right now it's just terminology
+
+Terminology: Inheritance 
+'Subclasses' are more specialized versions of a class which inherit attributes and behaviors from their parent classes,and can introduce their own
+
+https://en.wikipedia.org/wiki/Object-oriented_programming
+
+
+class PartyAnimal :
+   x = 0
+   name = " "
+
+   def __init__(self, nam) :
+     self.name = nam
+     print(self.name, 'Constructed')
+
+   def party(self) :
+     self.x = self.x + 1
+     print(self.name,'Party Count',self.x) 
+
+class FootballFan(PartyAnimal) :  # no init required for this class cause it's subclass inheritin all in PA
+   points = 0
+   def touchdown(self) :
+     self.points = self.points + 7
+     self.party()
+     print(self.name,"points",self.points)     
+
+
+s = PartyAnimal('sally')
+s.party()
+
+j = FootballFan('jim')
+j.party()
+j.touchdown()
+
+
+no init required FootballFan class cause it's subclass inheritin all in PA. So it will make a name var,and an x starting with 0 a variable name will have jim in it. And a variable points will have a 0 in it. So this j variable has more things in it that the s variable.* s variable calls just the PA class objects, where as the j variable in addition to calling the PA class objects which it's inheriting also call FootballFan objects*
+so we call j.party it goes to party method def and add 1 to x and then we call j.touchdown,it goes to touchdown def and adds 7 to points
+and then calls party
+
+call j.party adds 1 t0 x
+     j.toucdown   adds 7 to points
+     and self.party()..it calls party within us.self.party is the current object. (Self and j are same. recall that j is now FootballFan which has inherited everything in PA) so it goes up to party method(self),parses self in and adds 1 to it,to the x of the j variable,so it becomes and prints out 2
+
+Output:
+
+sally Constructed
+sally Party Count 1
+jim Constructed
+jim Party Count 1        j.party
+jim Party Count 2          j.touchdown prints this and
+jim points 7          this throught self.party() and print statement that followed
+
+
+_________________________
+|X :   2                |
+|                       |
+|Name: jim              |
+|                       |
+|Points: 7              |
+|                       |
+|_______________________l 
+
+
+
+
+
+
+
+
+
+
+FootballFan is a class which extends PartyAnimal. It has all the capabilities of party animal and more
+
+
+Definitions 
+* Class :- A template
+* Attribute :- A variable within a class
+* Method:- A function within a class
+* Object:- A particular instance of a class
+* Constructor:- Code that runs when an object is created/ sets up an object or an instance when it's created
+* Inheritance:- the ability to extend a class to make a new class.
+
+OOP
+Is very structured approach to code reuse.
+We can group data and functionality together and create many independent instances of a class.
+
+
+x = 'you have '   an object
+
+    x.upper   is calling a method using the dot operator
+
+
+
+
+
+
+
+
+
+
+
+
+
 
