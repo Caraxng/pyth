@@ -1,4 +1,233 @@
  
-                                     Databases 
+                                           Databases 
                                      
-                                     
+                                   Sequential Master Update
+                                            1970s
+                Old SOrted                                       New Sorted 
+                      ^                                                ^
+                      |                                                |
+                      |                                                |
+                      |                                                |
+                      |                                                |
+                      |_________________________|______________________|             
+                                                |
+                                                |
+                                                |
+                                                |
+                                                |
+                                                v  
+                                        Transaction Sorted
+
+
+
+
+
+
+
+Random Access Memory :
+
+* When you can randomly acccess data
+* How can you layout data to be more efficient
+* Sorting might not be the best idea
+
+Databases is the science of how you make use of rotating random access data in a way that allows you to read,modify and update data simoultanneously from different locations and keep the data completely consistent. 
+
+
+Relational Databases :
+
+Relational data bases model data by storing rows and columns in tables. The power of relational databases lies in it's ability to efficiently retrieve data from those tables and in particular where there are multiple tables and the relationship between those tables involved in the query. 
+
+Terminology.
+
+Databases : Contains many tables.
+Relation(or Tables): Contains tuples and attributes
+Tuple or Row:  A set of fields that generally represent and 'object' like a person or music track
+Attribute(also column or field): One of possibly many elements of data corresponding to the object represented by the row.
+
+
+                         
+                         
+                         
+                             Attribute
+                                 |
+                                 |
+                                 |
+                    _____________v_______________
+                   |   |         |          |   |
+                   |   |         |          |   |
+                   |___|_________|_________ |___|
+          Tuples   |___|_________|__________|__ |
+                   |___|_________|__________|___|
+                   \                           /
+                    \                         /
+                     \                       /
+                       \                    /
+                         \                /          
+                           \             /           
+                             \ Relation /
+
+
+A relation is defined as a set of tuples that have the same attributes. A tuple usually represents and object and an information about the object. Objects are typically physical objects or concepts. A relation is usually described as a table,which is organized into rows and columns. All the data referenced by an attribute are in the same domain and conform to the same constraints.  Wikipedia. 
+
+
+SQL
+
+Structured Query Language. 
+This is the language we use to issue commands to the database. 
+
+* Create a table
+* Retrieve some data
+* Insert data
+* Delete Data
+
+
+![](./flow.drawio.svg)
+
+
+What we are going to be doing is giving instruction that does crud....create,read, update,and delete data. 
+
+
+
+
+
+
+![](./dbprocess.drawio.svg)
+
+
+Web Application /w Databases :
+
+Application Developer : Builds the logic for the application,the look and fill of the application - monitors the application for problems.
+
+Database Administrator : Monitors and adjusts the database as the program runs in production
+Often both people participate in building the data model.
+
+
+
+End-User<----->Application Software<------->Database Server  
+                       A                        A
+                       |                        |
+                       |                        |
+                       |                        |
+                       |                        |
+                       v                        |
+                   Developer                    |
+                            |                   v
+                            DBA <-------->Database Tools
+
+
+
+
+Dynamic data is stored in databases.
+
+
+Database Administrator :
+
+Responsible for the design,implementation,maintenance,and repair of an organizations database. Includes dev and design of db strategies,monitoring and improving db performance and capacity,and planning for future expansion requirements. They may also plan and implement security measures to safeguard the database.
+
+Database Model :
+
+Db Model or Schema is the structure or format of a db,described in a formal language supported by the db management system. In other words, db model is the application of a data model when used in conjuction with db management system.
+
+Common Database Systems:
+Three Major Db MGT Systems in wide use :
+
+ * Oracle :
+  Large commercial enterprise scale very very tweakable 
+ * MySQL :
+  Simpler but very fast and scalable - commercial open source
+ * sqlServer :
+  very nice. From microsoft(also access)
+
+* Many other smaller projects free and open open source. 
+ * HSQL, SQLite, Postgres..,  
+
+
+* SQLite is very popular....
+
+* SQLite browser allows us to easily manipulate SQLite files
+
+* It's embedded in python and some other programming languages.
+
+       
+       
+    PART : 2
+Lets Make A Database :
+
+
+SQL : Insert 
+
+The Insert statement inserts a row into a table. 
+
+INSERT INTO Users (name, email) VALUES ('Kristin','kf@umich.edu') 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
