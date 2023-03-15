@@ -164,59 +164,323 @@ INSERT INTO Users (name, email) VALUES ('Kristin','kf@umich.edu')
 
 
 
+Python for Everybody Database Handout
+
+https://www.py4e.com/lectures3/Pythonlearn-15-Database-Handout.txt
+
+Download and Install: http://sqlitebrowser.org/
+
+Single Table SQL
+
+CREATE TABLE "Users" ("name" TEXT, "email" TEXT)
+
+INSERT INTO Users (name, email) VALUES ('Chuck', 'csev@umich.edu')
+INSERT INTO Users (name, email) VALUES ('Colleen', 'cvl@umich.edu')
+INSERT INTO Users (name, email) VALUES ('Ted', 'ted@umich.edu')
+INSERT INTO Users (name, email) VALUES ('Sally', 'a1@umich.edu')
+INSERT INTO Users (name, email) VALUES ('Ted', 'ted@umich.edu')
+INSERT INTO Users (name, email) VALUES ('Kristen', 'kf@umich.edu')
+
+DELETE FROM Users WHERE email='ted@umich.edu'
+
+UPDATE Users SET name="Charles" WHERE email='csev@umich.edu'
+
+* Retrieving Records:
+
+The select statement retrieves a group of records. You can either retrieve all the records or a subset of the records with a WHERE clause 
+
+
+
+SELECT * FROM Users
+
+SELECT * FROM Users WHERE email='csev@umich.edu'
+
+
+* You can add an ORDER BY clause to SELECT statement to get the results sorted in ascending or descending order
+
+
+SELECT * FROM Users ORDER BY email
+
+SELECT * FROM Users ORDER BY name DESC
+
+Multi-Table SQL:
+
+CREATE TABLE "Artist" (
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, 
+    "name" TEXT)
+
+CREATE TABLE "Album" (
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, 
+    artist_id INTEGER,
+    "title" TEXT)
+
+CREATE TABLE "Genre" (
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, 
+    "name" TEXT)
+
+CREATE TABLE "Track" (
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, 
+    album_id INTEGER, genre_id INTEGER, len INTEGER, rating INTEGER, 
+    "title" TEXT, "count" INTEGER)
+
+INSERT INTO Artist (name) VALUES ('Led Zepplin')
+INSERT INTO Artist (name) VALUES ('AC/DC')
+
+INSERT INTO Genre (name) VALUES ('Rock') ;
+INSERT INTO Genre (name) VALUES ('Metal');
+
+INSERT INTO Album (title, artist_id) VALUES ('Who Made Who', 2);
+INSERT INTO Album (title, artist_id) VALUES ('IV', 1);
+
+INSERT INTO Track (title, rating, len, count, album_id, genre_id) 
+    VALUES ('Black Dog', 5, 297, 0, 2, 1) ;
+INSERT INTO Track (title, rating, len, count, album_id, genre_id) 
+    VALUES ('Stairway', 5, 482, 0, 2, 1) ;
+INSERT INTO Track (title, rating, len, count, album_id, genre_id) 
+    VALUES ('About to Rock', 5, 313, 0, 1, 2) ;
+INSERT INTO Track (title, rating, len, count, album_id, genre_id) 
+    VALUES ('Who Made Who', 5, 207, 0, 1, 2) ;
+
+SELECT Album.title, Artist.name FROM Album JOIN Artist 
+    ON Album.artist_id = Artist.id
+
+SELECT Album.title, Album.artist_id, Artist.id, Artist.name 
+    FROM Album JOIN Artist ON Album.artist_id = Artist.id
+
+SELECT Track.title, Track.genre_id, Genre.id, Genre.name 
+    FROM Track JOIN Genre   
+
+SELECT Track.title, Genre.name FROM Track JOIN Genre 
+    ON Track.genre_id = Genre.id
+
+SELECT Track.title, Artist.name, Album.title, Genre.name 
+FROM Track JOIN Genre JOIN Album JOIN Artist 
+    ON Track.genre_id = Genre.id AND Track.album_id = Album.id 
+    AND Album.artist_id = Artist.id
+ 
+
+Many-Many Relationship
+
+CREATE TABLE User (
+    id     INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+    name   TEXT UNIQUE,
+    email  TEXT
+) ;
+
+CREATE TABLE Course (
+    id     INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+    title  TEXT UNIQUE
+) ;
+
+CREATE TABLE Member (
+    user_id     INTEGER,
+    course_id   INTEGER,
+	role        INTEGER,
+    PRIMARY KEY (user_id, course_id)
+) ;
+
+INSERT INTO User (name, email) VALUES ('Jane', 'jane@tsugi.org');
+INSERT INTO User (name, email) VALUES ('Ed', 'ed@tsugi.org');
+INSERT INTO User (name, email) VALUES ('Sue', 'sue@tsugi.org');
+
+INSERT INTO Course (title) VALUES ('Python');
+INSERT INTO Course (title) VALUES ('SQL');
+INSERT INTO Course (title) VALUES ('PHP');
+
+INSERT INTO Member (user_id, course_id, role) VALUES (1, 1, 1);
+INSERT INTO Member (user_id, course_id, role) VALUES (2, 1, 0);
+INSERT INTO Member (user_id, course_id, role) VALUES (3, 1, 0);
+
+INSERT INTO Member (user_id, course_id, role) VALUES (1, 2, 0);
+INSERT INTO Member (user_id, course_id, role) VALUES (2, 2, 1);
+
+INSERT INTO Member (user_id, course_id, role) VALUES (2, 3, 1);
+INSERT INTO Member (user_id, course_id, role) VALUES (3, 3, 0);
+
+SELECT User.name, Member.role, Course.title
+  FROM User JOIN Member JOIN Course
+  ON Member.user_id = User.id AND Member.course_id = Course.id
+  ORDER BY Course.title, Member.role DESC, User.name 
 
 
 
 
+SQL SUMMARY:
 
 
 
+INSERT INTO, user,member,etc ..Define the table names in braces ,seperate by coma...the VALUES then another braces for the record or table data each quoted and separated by coma 
+
+
+DELETE: FROM ,WHERE
+
+
+UPDATE : SET(to) WHERE
+
+
+SELECT:
+FROM - WHERE
+ORDER BY
 
 
 
+COMPLEX MODELS : Multiple Tables  PART 3
+
+* DataBase Design is an art form of it's own with particular skills and experience.
+* Our goal is to avoid the really bad mistakes and design clean and eaily understood databases
+* Others may performance tune things later
+* Database design starts with a picture. 
 
 
+Database design is figuring out the data that your application is going to want to store and and spreading that across multiple tables. 
+
+BUILDING A DATA MODEL
+
+* Drawing a picture of the data objects for our application and then figuring out how to represent the objects and their relationships.
+* Basic Rule: Don't put the same string data in twice. Use a relationship instead.
+* Where there's one thing in the real world,there should be one copy of that thing in the database
+
+Example
+
+Making a Database For Music collection Website/System
+
+FOr Each Piece of info : ...
+
+* Is the column an object or an attribute of another object (attribute,feature characteristics)
+* Once we define objects,we need to define the relationships between objects 
+
+objects here 
+
+len ,track, artist,Genre ,Rating,Count, Album
 
 
+                                              Track
+                                                ^
+                                                |
+                Tracks Belongs to Album         |
+                                               _|
+  Alb Belongs to Artis                       /len
+         Artist<------------Album<----------/ rating
+                                              count
+                                              /
+                                             /
+                                            /
+                                           /
+                                          V  Track belongs to genre
+                                        Genre 
 
 
+After this connection columns with duplication data now have tables
 
 
+Each track can appears once.
+A genre can appear many times for different tracks
+One artist can have multiple albums
+An artist can have more than one song,the name can appear more than one time
 
 
+PART 4: Representing Relationships In Databases 
 
 
+Database Normalization 3NF(third Normal Form)
+
+* There are tonns of database theory. Way too much to understand without excessive predicate calculus.
+* Do not replicate data,reference data. Point at Data.
+* Use integers for keys and for references 
+* Add special key column to each table which we will make references to. By convention,many programmers call this column id. 
+
+Don't replicate data,use integer keys to point to them and represent the data.
 
 
+We want to keep track of which band is the creator of each music track,what album does this song belong ??
+Which album is the song related to ?.
 
 
+Integer Reference Pattern :
+
+We use integers to reference rows in another table
+
+THree Basic Types of Keys :
+                                                                Album:
+* Primary Key:                                                    id        7
+Generally an integer auto-increment field                                  /
+* Logical Key :                                                  Title    /   could be song or singer title
+What the outside world uses for lookup                                   /
+* Foreign Key :                                                 Artist id 
+Generally an integer key pointing to a row in another table.
+Points to the primary key of another row. 
+
+KEY RULES
+
+Best practices ....
+
+* Never use your logical key as the primary key
+* Logical keys can and do change albeit slowly.
+* Relationships that are based on matching string fields are less efficient than integers.
+
+User
+id (primary key)
+login (logical key)
+password
+name
+email
+created_at
+modified_at
+login_at
+
+FOREIGN KEYS 
+
+* A  foreign key is when a table has a column that contains a key which points to the primary key of another table
+* When all primary keys are integers,this is good, very good.
+
+                   Album (table)
+Artist(table)       id
+id \____________ _  Title
+name              \ Artist_id (foreign key) points to the id key of the artist table id (primary key)
 
 
+Relationship Building in Tables
 
 
+PART 5 : Foriegn Keys
 
 
+How our data will be spread across tables and how those tables are connected.
 
 
+                                              Track
+                                                ^
+                                                |
+                Tracks Belongs to Album         |
+                                               _|
+  Alb Belongs to Artis                       /len
+         Artist<------------Album<----------/ rating
+                                              count
+                                              /
+                                             /
+                                            /
+                                           /
+                                          V  Track belongs to genre
+                                        Genre 
 
 
+Now we have to take this and map this in a way that leads to the columns and the needed columns in each database tables
 
+           Belongs to      Track
+                           Title
+ Album <------------       Rating
+                           Len
+                           Count
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    (Table)                      Track (table)
+                     Album
+                     Id (primary Key)<----
+       (logical Key) Title                \      id  (primary Key)
+                                           \     Title (logical key)
+                                            \    Rating
+                                             \   Len
+                                              \  Count
+                                               \_album_id (foreign key)
 
 
 
